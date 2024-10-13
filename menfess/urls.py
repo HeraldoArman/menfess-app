@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls, name="admin"),
     path('', views.index, name="index"),
     path('create/', views.create, name="create"),
-    path('reply/', views.reply, name="reply"),
+    path('reply/<slug:slug>', views.reply, name="reply"),
 ]

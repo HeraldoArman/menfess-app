@@ -25,7 +25,20 @@ class CreateMenfess(forms.ModelForm):
         }
         
         
-# class ReplyMenfess(forms.ModelForm):
-    # class Meta:
-        # model = Reply
-        # fields = ('form_reply_name', 'reply_meessage')
+class ReplyMenfess(forms.ModelForm):
+    class Meta:
+        model = Reply
+        fields = ('from_reply_name', 'reply_message')
+        
+        widgets = {
+            'from_reply_name' : forms.TextInput(attrs={'class':'form-control', 
+                                                 'placeholder': 'someone',
+                                                 'name': 'from_reply_name',
+                                                 'id': 'from_reply_name',
+                                                 'type': 'text'}),
+            'reply_message' : forms.Textarea(attrs={'class': 'form-control',
+                                               'placeholder': 'Hi, Love U',
+                                                'name': 'reply_message',
+                                                'id': 'reply_message',
+                                                'rows': 2}),
+        }

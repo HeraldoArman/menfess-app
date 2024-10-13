@@ -4,24 +4,24 @@
         <section class="hidden">
             <div class="p-3 mb-3 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-5">
-                    <h5 class="display-10 fw-bold">From: Someone</h5>
-                    <h5 class="display-10 fw-bold">To: Someone</h5>
-                    <p class="col-md-15 fs-10">ini menfess saya</p>
+                    <h5 class="display-10 fw-bold">From: {{post.from_name}}</h5>
+                    <h5 class="display-10 fw-bold">To: {{post.to_name}}</h5>
+                    <p class="col-md-15 fs-10">{{post.message}}</p>
     
     
-                    <form action="" method="post"></form>
-                    <div class="mb-3">
-                        <label for="from" class="form-label">From:</label>
-                        <input type="text" id="from" name="from" class="form-control" placeholder="Someone">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message:</label>
-                        <textarea name="message" id="message" class="form-control" placeholder="Hi, Love U"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        
-                        <button class="btn btn-outline-primary" type="button">Reply!</button>
-                    </div>
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="from" class="form-label">From:</label>
+                            {{ form.from_reply_name }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message:</label>
+                            {{ form.reply_message }}
+                        </div>
+                        <div class="mb-3">
+                            <input class="btn btn-outline-primary" type="submit" value='Reply!'>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -34,26 +34,23 @@
             </div>
         </section>
 
+        {% for data in all_reply %}
         <section class="hidden">
             <div class="p-3 mb-3 bg-body-tertiary rounded-3">
-                <div class="container-fluid py-2">
-                    <p class="fw-light">10.00 - 1/1/2024</p>
-                    <h5 class="display-10 fw-bold">From: Someone</h5>
-                    <p class="col-md-15 fs-10">Hello</p>
+                <div class="container-fluid py-2" id="{{data.pk}}">
+                    {% comment %} <p class="fw-light">10.00 - 1/1/2024</p> {% endcomment %}
+                    {% comment %} <h5 class="display-10 fw-bold">From: Someone</h5> {% endcomment %}
+                    {% comment %} <p class="col-md-15 fs-10">Hello</p> {% endcomment %}
+                        <p class="fw-light">{{data.reply_date}}</p>
+                        <h5 class="display-10 fw-bold">From: {{data.from_reply_name}}</h5>
+                        <p class="col-md-15 fs-10">{{data.reply_message}}</p>
+        
+                        
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            {% endfor %}
 
-        <section class="hidden">
-            <hr>
-            <div class="p-3 mb-3 bg-body-tertiary rounded-3">
-                <div class="container-fluid py-2">
-                    <p class="fw-light">10.00 - 1/1/2024</p>
-                    <h5 class="display-10 fw-bold">From: Someone</h5>
-                    <p class="col-md-15 fs-10">Hello 2</p>
-                </div>
-            </div>
-        </section>
 
 
         {% endblock body_block %}

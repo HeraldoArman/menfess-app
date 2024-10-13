@@ -7,7 +7,7 @@ class Menfess(models.Model):
     from_name = models.CharField(max_length=255)
     to_name = models.CharField(max_length=255)
     message = models.TextField()
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateTimeField(default=timezone.localtime(timezone.now()))
     slug = models.SlugField(unique=True, blank=True)
       
     def save(self, *args, **kwargs):

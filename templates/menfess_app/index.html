@@ -1,53 +1,30 @@
 <!DOCTYPE html>
 {% extends "menfess_app/base.html" %}
     {% block body_block %}
-        
+    
         <section class="hidden">
           <div class="p-5 mb-4 bg-body-tertiary rounded-3">
               <div class="container-fluid py-5">
                   <h1 class="display-5 fw-bold">Welcome to Menfess Website!</h1>
-                  <p class="col-md-15 fs-4">Got something to say but want to stay anonymous? Share your thoughts, confessions, or secrets freely with the world here. Your voice, your story—completely anonymous!</p>
+                  <p class="col-md-15 fs-4">{{caption}}</p>
                   <a class="btn btn-primary btn-lg" type="button" href="{% url "create" %}">Create Menfess Here!</a>
               </div>
           </div>
         </section>
+        {% for data in menfess_data %}
+        <section class="hidden">
+          <hr>
+          <div class="p-3 mb-3 bg-body-tertiary rounded-3">
+              <div class="container-fluid py-5">
+                  <p class="fw-light">{{data.date}}</p>
+                  <h5 class="display-10 fw-bold">From: {{data.from_name}}</h5>
+                  <h5 class="display-10 fw-bold">To: {{data.to_name}}</h5>
+                  <p class="col-md-15 fs-10">{{data.message}}</p>
+
+                  <a class="btn btn-outline-primary btn-sm" type="button" href="{% url "reply" data.slug %}">Reply!</a>
+              </div>
+          </div>
+        </section>
+        {% endfor %}
         
-        <section class="hidden">
-          <hr>
-          <div class="p-3 mb-3 bg-body-tertiary rounded-3">
-              <div class="container-fluid py-5">
-                  <p class="fw-light">10.00 - 1/1/2024</p>
-                  <h5 class="display-10 fw-bold">From: Someone</h5>
-                  <h5 class="display-10 fw-bold">To: Someone</h5>
-                  <p class="col-md-15 fs-10">ini menfess saya</p>
-                  <a class="btn btn-outline-primary btn-sm" type="button" href="{% url "reply" %}">Reply!</a>
-              </div>
-          </div>
-        </section>
-
-        <section class="hidden">
-          <hr>
-          <div class="p-3 mb-3 bg-body-tertiary rounded-3">
-              <div class="container-fluid py-5">
-                  <p class="fw-light">10.00 - 1/1/2024</p>
-                  <h5 class="display-10 fw-bold">From: Someone</h5>
-                  <h5 class="display-10 fw-bold">To: Someone</h5>
-                  <p class="col-md-15 fs-10">ini menfess saya</p>
-                  <a class="btn btn-outline-primary btn-sm" type="button" href="{% url "reply" %}">Reply!</a>
-              </div>
-          </div>
-        </section>
-
-        <section class="hidden">
-          <hr>
-          <div class="p-3 mb-3 bg-body-tertiary rounded-3">
-              <div class="container-fluid py-5">
-                  <p class="fw-light">10.00 - 1/1/2024</p>
-                  <h5 class="display-10 fw-bold">From: Someone</h5>
-                  <h5 class="display-10 fw-bold">To: Someone</h5>
-                  <p class="col-md-15 fs-10">ini menfess saya</p>
-                  <a class="btn btn-outline-primary btn-sm" type="button" href="{% url "reply" %}">Reply!</a>
-              </div>
-          </div>
-        </section>
         {% endblock body_block %}
