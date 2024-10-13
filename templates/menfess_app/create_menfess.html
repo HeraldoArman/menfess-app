@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 {% extends "menfess_app/base.html" %}
     {% block body_block %}
-        <form action="{% url "index" %}" method="post"></form>
+    <div class="px-3">
+        <form action="" method="POST">
+            {% csrf_token %}
             <div class="mb-3">
                 <label for="from" class="form-label">From:</label>
-                <input type="text" id="from" name="from" class="form-control" placeholder="Someone">
+                {{ form.from_name }}
             </div>
             <div class="mb-3">
-                <label for="to" class="form-label">To:</label>
-                <input type="text" id="to" name="to" class="form-control" placeholder="Crush">
+                <label for="from" class="form-label">To:</label>
+                {{ form.to_name }}
             </div>
             <div class="mb-3">
-                <label for="message" class="form-label">Message:</label>
-                <textarea name="message" id="message" class="form-control" placeholder="Hi, Love U"></textarea>
+                <label for="from" class="form-label">Message:</label>
+                {{ form.message }}
             </div>
             <div class="mb-3">
-                <button class="btn btn-primary" type="submit">Create Menfess!</button>
+                <input class="btn btn-primary" type="submit" value='Create Menfess'>
             </div>
         </form>
-
-        {% endblock body_block %}
+    </div>
+    {% endblock body_block %}
