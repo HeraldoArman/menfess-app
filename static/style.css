@@ -2,6 +2,12 @@ h1 {
     text-align: center;
 }
 
+pre {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
 .icon-mode {
     display: flex;
     flex-direction: column;

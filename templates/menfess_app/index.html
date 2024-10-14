@@ -19,7 +19,7 @@
                   <p class="fw-light">{{data.date}}</p>
                   <h5 class="display-10 fw-bold">From: {{data.from_name}}</h5>
                   <h5 class="display-10 fw-bold">To: {{data.to_name}}</h5>
-                  <p class="col-md-15 fs-10">{{data.message}}</p>
+                  <pre class="col-md-15 fs-10">{{data.message}}</pre>
 
                   <a class="btn btn-outline-primary btn-sm" type="button" href="{% url "reply" data.slug %}">Reply!</a>
               </div>

@@ -2,8 +2,21 @@
 {% extends "menfess_app/base.html" %}
     {% block body_block %}
     <div class="px-3">
+        {% comment %} <form action="" method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <p>Don't know what to write? try generating with AI!</p>
+                <input class="btn btn-outline-primary" type="submit" value='generate' name='submit'>
+            </div>
+        </form> {% endcomment %}
         <form action="" method="POST">
             {% csrf_token %}
+            <div class="mb-3">
+                <p>Don't know what to write? try generating with AI!</p>
+                <input class="btn btn-outline-primary" type="submit" value='generate' name='submit' formnovalidate>
+            </div>
+
             <div class="mb-3">
                 <label for="from" class="form-label">From:</label>
                 {{ form.from_name }}
@@ -17,7 +30,7 @@
                 {{ form.message }}
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary" type="submit" value='Create Menfess'>
+                <input class="btn btn-primary" type="submit" value='Create Menfess' name='submit'>
             </div>
         </form>
     </div>

@@ -38,12 +38,10 @@
         <section class="hidden">
             <div class="p-3 mb-3 bg-body-tertiary rounded-3">
                 <div class="container-fluid py-2" id="{{data.pk}}">
-                    {% comment %} <p class="fw-light">10.00 - 1/1/2024</p> {% endcomment %}
-                    {% comment %} <h5 class="display-10 fw-bold">From: Someone</h5> {% endcomment %}
-                    {% comment %} <p class="col-md-15 fs-10">Hello</p> {% endcomment %}
+
                         <p class="fw-light">{{data.reply_date}}</p>
                         <h5 class="display-10 fw-bold">From: {{data.from_reply_name}}</h5>
-                        <p class="col-md-15 fs-10">{{data.reply_message}}</p>
+                        <pre class="col-md-15 fs-10">{{data.reply_message}}</pre>
         
                         
                     </div>

@@ -20,7 +20,8 @@ class CreateMenfess(forms.ModelForm):
             'message' : forms.Textarea(attrs={'class': 'form-control',
                                                'placeholder': 'Hi, Love U',
                                                 'name': 'message',
-                                                'id': 'message',}),
+                                                'id': 'message',
+                                                'rows': 5,}),
             
         }
         
@@ -40,5 +41,5 @@ class ReplyMenfess(forms.ModelForm):
                                                'placeholder': 'Hi, Love U',
                                                 'name': 'reply_message',
                                                 'id': 'reply_message',
-                                                'rows': 2}),
+                                                'rows': 5}),
         }
