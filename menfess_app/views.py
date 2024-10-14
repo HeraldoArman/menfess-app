@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from menfess_app import forms
 from menfess_app.models import Menfess, Reply
 import random
-from menfess_app.AI import generate_menfess
+from menfess_app.AI import generate_menfess, reply_with_AI
 # Create your views here.
 
 def index(request):
     menfess_data = Menfess.objects.all().order_by('-date')
-    print(menfess_data[0].message)
+    # print(menfess_data[0])
+
     
     random_caption = ["Have a confession or secret to share? Say it anonymously and let your story be heard without revealing your identity. Speak your truth safely here!", 
                       "Want to vent or confess without anyone knowing it's you? Here, your thoughts are safe and anonymous. Let it all out—completely free of judgment!", 
@@ -38,12 +39,37 @@ def create(request):
             # Validasi normal saat submit form
             form = forms.CreateMenfess(request.POST)
             if form.is_valid():
-                form.save()
+                menfess_created = form.save()
                 print(form.cleaned_data)
                 
-                return redirect('index')
+                return redirect(f'/#{menfess_created.pk}')
 
     return render(request, "menfess_app/create_menfess.html", context={'form': form})
+
+def reply(request, slug):
+    post = get_object_or_404(Menfess, slug=slug)  # Mengambil berdasarkan slug
+
+    form = forms.ReplyMenfess()
+    all_reply = Reply.objects.filter(menfess=post.pk).order_by('-reply_date')
+    if request.method == 'POST':
+        # form = forms.ReplyMenfess(request.POST)
+        
+        if request.POST.get('submit') == 'generate':
+            # form = forms.CreateMenfess(initial={'message': 'lol'}, data=request.POST)
+            data = request.POST.copy()  
+            data['reply_message'] = reply_with_AI(post.message)
+            form = forms.ReplyMenfess(data)
+        else:
+            form = forms.ReplyMenfess(request.POST)
+            if form.is_valid():
+                reply = form.save(commit=False)
+                reply.menfess = post  # Hubungkan reply dengan post terkait
+                reply.save()
+                form = forms.ReplyMenfess()
+                return redirect(f'{request.path}#{reply.pk}')# Arahkan ke halaman index setelah reply
+        
+    
+    return render(request, "menfess_app/reply.html", context={'form': form, 'post': post, 'all_reply': all_reply})
 
 # def reply(request, slug):
 #     form = forms.Reply()
@@ -57,22 +83,4 @@ def create(request):
 #             return redirect('reply')
 #     return render(request, "menfess_app/reply.html", context={'form': form, 'reply':get_reply})
 
-
-def reply(request, slug):
-    post = get_object_or_404(Menfess, slug=slug)  # Mengambil berdasarkan slug
-
-    form = forms.ReplyMenfess()
-    all_reply = Reply.objects.filter(menfess=post.pk).order_by('-reply_date')
-    if request.method == 'POST':
-        form = forms.ReplyMenfess(request.POST)
-        
-        if form.is_valid() and request.POST.get('submit') == 'Create Menfess':
-            reply = form.save(commit=False)
-            reply.menfess = post  # Hubungkan reply dengan post terkait
-            reply.save()
-            form = forms.ReplyMenfess()
-            return redirect(f'{request.path}#{reply.pk}')# Arahkan ke halaman index setelah reply
-        
-    
-    return render(request, "menfess_app/reply.html", context={'form': form, 'post': post, 'all_reply': all_reply})
 

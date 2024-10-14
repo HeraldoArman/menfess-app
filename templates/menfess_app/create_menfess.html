@@ -12,11 +12,7 @@
         </form> {% endcomment %}
         <form action="" method="POST">
             {% csrf_token %}
-            <div class="mb-3">
-                <p>Don't know what to write? try generating with AI!</p>
-                <input class="btn btn-outline-primary" type="submit" value='generate' name='submit' formnovalidate>
-            </div>
-
+            
             <div class="mb-3">
                 <label for="from" class="form-label">From:</label>
                 {{ form.from_name }}
@@ -24,6 +20,10 @@
             <div class="mb-3">
                 <label for="from" class="form-label">To:</label>
                 {{ form.to_name }}
+            </div>
+            <div class="mb-3">
+                <p>Don't know what to write? try generating with AI!</p>
+                <input class="btn btn-outline-primary" type="submit" value='generate' name='submit' formnovalidate>
             </div>
             <div class="mb-3">
                 <label for="from" class="form-label">Message:</label>

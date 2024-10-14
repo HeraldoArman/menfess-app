@@ -9,6 +9,7 @@ class Menfess(models.Model):
     message = models.TextField()
     date = models.DateTimeField(default=timezone.localtime(timezone.now()))
     slug = models.SlugField(unique=True, blank=True)
+   
       
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -17,6 +18,10 @@ class Menfess(models.Model):
         
     def __str__(self):
         return self.from_name
+    
+    @property
+    def total_reply(self):
+        return self.reply_set.count()
 
 class Reply(models.Model):
     menfess = models.ForeignKey(Menfess, on_delete=models.CASCADE)

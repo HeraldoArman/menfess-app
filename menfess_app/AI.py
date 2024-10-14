@@ -21,7 +21,7 @@ def reply_with_AI(message):
         KEY: Final[str] = os.getenv('API_KEY')
         genai.configure(api_key=KEY)
         model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(f"pretend you are his/her friend. reply his/her menfess message '{message}'")
+        response = model.generate_content(f"pretend you are his/her friend. reply his/her menfess message '{message}'. try to be as silly and funny as possible")
         result = response.text
         return result
     except:
