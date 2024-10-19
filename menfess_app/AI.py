@@ -28,10 +28,5 @@ def reply_with_AI(message):
         return "error"
     
 if __name__ == "__main__":
-    message = '''## Menfess:
-
-So I just realized... I've been wearing my socks inside out for the past 3 months. Like, I've been intentionally putting them on backwards every single time.  I think I'm just trying to be different, ya know? Maybe it's a new fashion trend? I'm calling it "Anti-Sock"  😎  
-
-Anyone else rocking the backwards socks?  Tell me I'm not alone. 😩'''
-
-    print(reply_with_AI(message))
+    message = ''
+    print(generate_menfess(message))
