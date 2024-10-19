@@ -16,6 +16,13 @@ import os
 from typing import Final
 load_dotenv()
 KEY: Final[str] = os.getenv('KEY')
+POSTGRES_DATABASE: Final[str] = os.getenv('POSTGRES_DATABASE')
+POSTGRES_URL: Final[str] = os.getenv('POSTGRES_URL')
+POSTGRES_USER: Final[str] = os.getenv('POSTGRES_USER')
+POSTGRES_HOST: Final[str] = os.getenv('POSTGRES_HOST')
+POSTGRES_PASSWORD: Final[str] = os.getenv('POSTGRES_PASSWORD')
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,8 +89,12 @@ WSGI_APPLICATION = 'menfess.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': POSTGRES_DATABASE,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': POSTGRES_HOST,
+        # 'PORT': '',
     }
 }
 
