@@ -20,6 +20,7 @@ This is a simple menfess website project created for learning purposes. This pro
 - **Backend**:
   - Django
   - PostgreSQL
+  - Gemini API
 
 
 ## Contribution
